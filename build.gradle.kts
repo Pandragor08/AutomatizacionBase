@@ -19,18 +19,18 @@ dependencies {
 
     implementation(platform("org.junit:junit-bom:5.10.0"))
     implementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.junit.platform:junit-platform-suite:1.10.0")
+    implementation("org.junit.platform:junit-platform-suite:1.10.0")
 
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
 
     implementation("io.cucumber:cucumber-java:$cucumberVersion")
     implementation("io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
 
-    testImplementation("io.qameta.allure:allure-cucumber7-jvm:$allureVersion")
+    implementation("io.qameta.allure:allure-cucumber7-jvm:$allureVersion")
 
-    testImplementation(platform("org.apache.logging.log4j:log4j-bom:$log4jVersion"))
-    testImplementation("org.apache.logging.log4j:log4j-api")
-    testImplementation("org.apache.logging.log4j:log4j-core")
+    implementation(platform("org.apache.logging.log4j:log4j-bom:$log4jVersion"))
+    implementation("org.apache.logging.log4j:log4j-api")
+    implementation("org.apache.logging.log4j:log4j-core")
 }
 
 tasks.test {
@@ -39,4 +39,7 @@ tasks.test {
 
 allure {
     version.set(allureVersion)
+}
+tasks.test {
+    systemProperty("headless", System.getProperty("headless"))
 }

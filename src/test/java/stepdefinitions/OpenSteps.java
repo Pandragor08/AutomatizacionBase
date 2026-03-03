@@ -1,27 +1,17 @@
 package stepdefinitions;
 
-import driver.DriverFactory;
 import io.cucumber.java.en.Given;
-import org.openqa.selenium.WebDriver;
-import utils.ConfigReader;
+import utils.AllureUtils;
+import utils.BaseActions;
+
 
 public class OpenSteps {
 
-    WebDriver driver;
-
     @Given("el usuario abre la pagina")
-    public void abrirPagina() {
-
-        driver = DriverFactory.getDriver();
-
-        driver.get(ConfigReader.get("baseUrl"));
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DriverFactory.quitDriver();
+    public void abro_la_url_principal() {
+        BaseActions.openURL(null); // usa la URL de config.properties
+        AllureUtils.attachScreenshot(BaseActions.getDriver(), "Página inicial abierta");
+        BaseActions.closeDriver();
     }
+
 }
