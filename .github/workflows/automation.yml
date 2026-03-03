@@ -28,10 +28,11 @@ jobs:
       - name: Generate Allure Report
         run: ./gradlew allureReport
 
+      - name: Debug - show build structure
+        run: ls -R build
+
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/reports/allure-report
-      - name: Debug - show build structure
-        run: ls -R build
+          publish_dir: build/allure-report
