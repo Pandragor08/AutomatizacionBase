@@ -1,13 +1,12 @@
-name: Run Automation Tests
+name: CI + CD Automation
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
-  test:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,3 +24,12 @@ jobs:
 
       - name: Run tests in headless mode
         run: ./gradlew clean test -Dheadless=true
+
+      - name: Generate Allure Report
+        run: ./gradlew allureReport
+
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/reports/allure-report
